@@ -53,6 +53,8 @@ function Loginpage() {
               </div>
               <button type="submit" className="login-button" style={{ padding: '10px 20px', backgroundColor: '#4caf50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>로그인</button>
             </form>
+
+            {/* 소셜계정 로그인 */}
             <p style={{ marginBottom: '10px' }}>소셜 계정으로 로그인</p>
             <div className="social-icons" style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
               <button className="social-button naver" style={{ width: '40px', height: '40px', borderRadius: '50%', border: 'none', cursor: 'pointer' }}>N</button>
