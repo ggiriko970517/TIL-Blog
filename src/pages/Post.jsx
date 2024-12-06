@@ -15,7 +15,10 @@ const Post = () => {
   const toggleComments = () => {
     setShowComments(!showComments);
   };
-git bentText, time: '방금 전' }]);
+
+  const postComment = () => {
+    if (commentText) {
+      setComments([...comments, { user: 'New User', text: commentText, time: '방금 전' }]);
       setCommentCount(commentCount + 1);
       setCommentText('');
     }
@@ -23,7 +26,7 @@ git bentText, time: '방금 전' }]);
 
   return (
     <div className="post">
-      <h1>포스트 제목 dddddd</h1>
+      <h1>포스트 제목</h1>
       <div className="post-header">
         <img src="profile.jpg" alt="Profile Picture" width="50" />
         <span>작성자</span>
