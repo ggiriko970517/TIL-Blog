@@ -26,7 +26,7 @@ const Post = () => {
 
   return (
     <div className="post">
-      <h1>포스트 제목</h1>
+      <h1>포스트 제목aaaaa</h1>
       <div className="post-header">
         <img src="profile.jpg" alt="Profile Picture" width="50" />
         <span>작성자</span>
