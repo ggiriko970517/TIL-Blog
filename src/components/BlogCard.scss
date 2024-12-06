@@ -1,0 +1,41 @@
+// 전체 카드 컨테이너 중앙 정렬 및 크기 설정
+.blog-card {
+    width: 100%;
+    max-width: 1200px; /* 캐러셀과 같은 크기로 제한 */
+    margin: 0 auto; /* 가로 중앙 정렬 */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 아이템을 중앙으로 정렬 */
+    gap: 1rem; /* 카드 간격 추가 */
+  }
+
+
+#thumbupcomment{
+    margin:0px;
+    padding:0px;
+    margin-left: 10px;
+    
+
+    .card-user{
+        box-sizing: border-box;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0;
+        margin-right: 40px;
+     
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:50px;
+        height:50px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.544);
+        overflow: hidden;
+        
+     .user{
+
+        width: 100%; /* 아이콘이 원 안에 맞도록 설정 */
+            height: 100%;
+     }   
+    }
+}
