@@ -8,7 +8,7 @@
 
   .comment, .reply {
     padding: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid white;
     border-radius: 4px;
     background-color: #f8f9fa;
     margin-bottom: 16px;
@@ -27,7 +27,7 @@
       cursor: pointer;
 
       &:hover {
-        color: #ff5722;
+        color: white;
       }
     }
   }
@@ -50,6 +50,7 @@
     background-color: black;
     color: #fff;
     border: none;
+    cursor: pointer;
 
     &:hover {
       background-color: black;

@@ -14,7 +14,6 @@ const Header = () => {
       </Navbar.Brand>
 
       {/* 검색창 */}
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between">
         <Form className="d-flex search-bar">
           <FormControl
