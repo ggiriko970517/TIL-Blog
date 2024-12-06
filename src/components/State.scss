@@ -1,0 +1,26 @@
+.state-section {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: center;
+  margin-top: 20px; /* 상단 여백 */
+  width: 100%;
+
+  .state-item {
+    display: flex;
+    justify-content: space-between; /* 텍스트와 숫자를 양쪽으로 배치 */
+    width: 80%; /* 전체 넓이 기준 배치 */
+    max-width: 300px; /* 최대 너비 제한 */
+    padding: 10px 0; /* 아이템 간 간격 */
+  }
+
+  .state-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+  }
+
+  .state-value {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
