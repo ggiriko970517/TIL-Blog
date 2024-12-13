@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Profile.scss';
+import '../sytles./Profile.scss';
 import State from './State'; // State 컴포넌트 가져오기
 
 const Profile = () => {

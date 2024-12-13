@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Blogintro.scss';
+import '../styles./Blogintro.scss';
 
 const Blogintro = () => {
   const [isEditing, setIsEditing] = useState(false); // 편집 모드 상태

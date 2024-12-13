@@ -1,5 +1,5 @@
 import React from 'react';
-import './State.scss';
+import '../styles./State.scss';
 import Blogintro from './Blogintro';
 
 const State = () => (

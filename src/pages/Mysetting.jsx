@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Settingicon from '../components/common/Setting_icon.png'
 import 'animate.css';
-import './Mysetting.scss';
+import '../styles/Mysetting/pages/Mysetting.scss';
 
 const Mysetting = () => (
   <div className="my-setting-container">
