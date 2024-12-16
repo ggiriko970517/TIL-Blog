@@ -1,28 +1,25 @@
 import './App.css';
-import Footer from './components/Footer';
-import HeaderBar from './components/HeaderBar';
+// import Footer from './components/Footer';
+// import HeaderBar from './components/HeaderBar';
 // import Alarm from './pages/Alarm';
 // import Home from './pages/Home';
 // import Setting from './pages/Setting';
 // import BookMark from './pages/BookMark';
-// import PostBlog from './pages/PostBlog';
-import Post from './pages/Post';
+import NewHome from './pages/NewHome';
+import Header from './components/Header';
 
 
 
 function App() {
   return (
     <div className="App">
-       <HeaderBar />
+      <Header />
+       {/* <HeaderBar /> */}
        {/* <Home /> */}
-
-       {/* <Setting />  */}
-        
+        <NewHome />
         {/* <BookMark /> */}
          {/* <Alarm /> */}
-      {/* <PostBlog /> */}
-        <Post />
-         <Footer /> 
+      {/*  <Footer />  */}
 
 
 

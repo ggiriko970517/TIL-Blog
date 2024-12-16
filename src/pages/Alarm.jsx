@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Alarm.scss';
+import '../style/page/Alarm.scss';
 import AlramIcon from '../components/common/alram_icon.png';
 
 

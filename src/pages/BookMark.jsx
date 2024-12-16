@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './BookMark.scss';
+import '../style/page/BookMark.scss';
 import BookMark_icon from '../components/common/bookmark_icon.png';
 
 const BookMark = () => {
