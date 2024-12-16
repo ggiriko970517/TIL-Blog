@@ -1,8 +1,3 @@
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
 
 .main-container {
   display: flex;
@@ -16,7 +11,7 @@
 }
 
 .content-wrapper {
-  flex: 1; /* Content와 RecentPosts를 나누는 Wrapper */
+  flex: 1;
   display: flex;
 }
 

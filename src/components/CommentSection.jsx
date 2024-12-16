@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CommentInput from './CommentInput';
 import Comment from './Comment';
-import '../styles/CommentSection.scss';
+import '../styles/MyBlog/CommentSection.scss';
 
 const CommentSection = () => {
   const [comments, setComments] = useState([]);

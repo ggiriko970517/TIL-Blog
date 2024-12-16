@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Reply from './Reply';
 import ReplyInput from './ReplyInput';
-import '../styles/Comment.scss';
+import '../styles/MyBlog/Comment.scss';
 
 const Comment = ({ comment, comments, updateComments }) => {
   const [showReplyInput, setShowReplyInput] = useState(false);
