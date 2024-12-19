@@ -1,0 +1,129 @@
+.bookmark-container {
+  font-family: Arial, sans-serif;
+
+//북마크 아이콘 & 버튼 div
+  .bookMark {
+      width: 100%;
+      padding: 20px;
+      display: flex; /* 플렉스박스를 사용 */
+      flex-direction: column;
+      background-color: none;
+      border-bottom: 2px solid rgb(202, 202, 202);
+
+//로고와 북마크 텍스트 조절
+ .bookmarkHeader{
+    display: flex;
+    align-items: center;
+ }
+
+
+     
+//북마크 아이콘 조정 
+    #bookmark-icon {
+      img {
+        width: 128px; /* 아이콘의 너비 */
+        height: 128px; /* 아이콘의 높이 */
+        object-fit: contain; /* 비율 유지 */
+        margin: 0 auto; /* 이미지 중앙 정렬 */
+        margin-left: 45px;
+        animation: bounceInDown 1s;
+      }
+    }
+
+//북마크 타이틀 
+span{
+position: relative;
+      margin-left: 25px;
+      font-size: 4rem;
+      font-weight: bold;
+      cursor: pointer;
+      -webkit-text-stroke: 2px black ;
+      background-image: linear-gradient(0deg, #3c9c5b, #4fb06d);
+      -webkit-background-clip:text ;
+      color: transparent;
+      background-repeat: no-repeat;
+      transition: background-size 0.2s ease-in;
+}
+.right{
+background-position: 0% 0%;
+      background-size: 100% 0%;
+}
+span:hover{
+background-size: 100% 100%;
+filter: drop-shadow(0 0 5px #ddeadd);
+}
+
+
+//버튼
+    .buttons {
+      margin-top: 20px;
+     
+      margin-right: 10px;
+
+      button {
+        padding:5px 5px;
+        margin: 0 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        &.active {
+          color: rgb(255, 111, 0);
+        }
+      }
+    }
+  }
+
+  .postList {
+    margin-top: 20px;
+    padding: 20px;
+
+    .post {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+
+      .userImage {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover; /* 이미지 비율 유지 */
+      }
+
+      .postContent {
+        flex: 1;
+
+        h3 {
+          margin: 0;
+          font-size: 18px;
+        }
+
+        p {
+          margin: 5px 0;
+          color: #666;
+        }
+
+        .postActions {
+          margin-top: 10px;
+
+          button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: lightgray;
+            color: black;
+
+            &:hover {
+              background-color: gray;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}
