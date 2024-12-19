@@ -4,10 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Logo from '../common/logo.png';
 import { faBell, faBook, faUser, faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const Logo = '/common/logo.png';
 
 function HeaderBar() {
   return (

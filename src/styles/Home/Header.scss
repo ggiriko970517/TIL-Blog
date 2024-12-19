@@ -1,0 +1,128 @@
+//헤더
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #00897b;
+  height: 90px;
+
+  //로고 
+  &-logo {
+
+  }
+
+  //검색창 
+  &-search {
+    width: 400px;
+    margin: 0 20px;
+    
+
+    //검색창 
+    input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 2px solid #ccc;
+      border-radius: 20px;
+    }
+  }
+
+
+  
+
+  &-icon {
+    position: relative;
+    margin-left: 15px;
+    cursor: pointer;
+
+  //알림 아이콘     
+    #alarm-icon {
+
+      font-size: 40px;
+    }
+
+
+    //알림 횟수
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
+    }
+
+    //포스팅, 새글쓰기 아이콘 
+    #posting-icon {
+      font-size: 40px;
+    }
+  }
+
+
+  //유저, 설정
+  &-profile,
+  &-settings {
+    position: relative;
+
+    //유저 프로필 이미지 
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    //설정아이콘
+  #threebar-icon{
+    font-size: 37px;
+    cursor: pointer;
+  }
+
+
+    //유저프로필, 설정바 드롭앤 드랍 
+    .dropdown {
+      width: 150px;
+      text-align: left;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      z-index: 99999;
+      font-weight: bold;
+      font-size: 22px;
+
+     //드롭앤드랍 텍스트 설정
+      a {
+
+        display: block;
+        padding: 10px 15px;
+        color: #333;
+        text-decoration: none;
+
+     //드롭앤드랍 텍스트 호버시 
+        &:hover {
+          background-color: #f0f0f0;
+          color:#00897b;
+        }
+      }
+    }
+  }
+
+}
+
+
+
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}

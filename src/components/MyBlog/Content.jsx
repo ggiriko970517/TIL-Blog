@@ -1,6 +1,6 @@
 import React from 'react';
 import CommentSection from './CommentSection';
-import '../styles/MyBlog/Content.scss';
+import '../../styles/MyBlog/Content.scss';
 
 const Content = () => {
   const recentPosts = [

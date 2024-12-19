@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/PostBlog.scss";
+import "../styles/Post/PostBlog.scss";
 
 // 아이콘 추가 (간단히)
 import { FaThumbsUp, FaComment, FaLock } from "react-icons/fa";

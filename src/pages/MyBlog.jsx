@@ -1,9 +1,9 @@
 import React from 'react';
-import HeaderBar from '../components/HeaderBar';
-import SideBar from '../components/SideBar';
-import Content from '../components/Content';
+import HeaderBar from '../components/Common/HeaderBar.jsx';
+import SideBar from '../components/MyBlog/SideBar';
+import Content from '../components/MyBlog/Content';
 import '../styles/MyBlog/MyBlog.scss';
-import Footer from '../components/Footer';
+import Footer from '../components/Common/Footer';
 
 const MyBlog = () => (
   <div>
