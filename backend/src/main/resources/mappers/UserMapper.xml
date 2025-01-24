@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.goboogie.repository.user.UserMapper">
+
+    <resultMap id="UserResultMap" type="project.goboogie.domain.User">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="passwordHash" column="password_hash"/>
+        <result property="profileImageUrl" column="profile_image_url"/>
+        <result property="bio" column="bio"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <insert id="save" parameterType="project.goboogie.dto.CreateUserDTO">
+        INSERT INTO users (username, email, password_hash, profile_image_url, bio, created_at, updated_at)
+        VALUES (#{username}, #{email}, #{passwordHash}, #{profileImageUrl}, #{bio}, NOW(), NOW())
+    </insert>
+
+    <select id="findById" parameterType="int" resultMap="UserResultMap">
+        SELECT * FROM users WHERE user_id = #{userId}
+    </select>
+
+    <select id="findAll" resultMap="UserResultMap">
+        SELECT * FROM users
+    </select>
+
+    <select id="findLikeUsersByPostId" parameterType="int" resultMap="UserResultMap">
+        SELECT u.* FROM users u
+        JOIN likes l ON u.user_id = l.user_id
+        WHERE l.post_id = #{postId}
+    </select>
+
+    <update id="update" parameterType="project.goboogie.domain.User">
+        UPDATE users
+        SET username = #{username}, email = #{email}, password_hash = #{passwordHash},
+        profile_image_url = #{profileImageUrl}, bio = #{bio}, updated_at = NOW()
+        WHERE user_id = #{userId}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM users WHERE user_id = #{userId}
+    </delete>
+
+    <select id="existsByEmail" parameterType="string" resultType="boolean">
+        SELECT COUNT(*) > 0 FROM users WHERE email = #{email}
+    </select>
+
+</mapper>

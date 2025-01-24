@@ -21,3 +21,48 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Spring specific
+/target
+*.log
+*.iml
+*.ipr
+*.iws
+/.idea/
+/.classpath
+/.project
+/.settings
+/.mvn/
+/mvnw
+/mvnw.cmd
+spring.log
+hs_err_pid*.log
+
+# React/Next.js specific
+.next
+.out
+.cache
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/jsconfig.json
+*.env.*.local
+
+# IDEs and Editors
+/.vscode/
+/.vscode/*
+*.swp
+*~
+.idea
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+*.DS_Store
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
