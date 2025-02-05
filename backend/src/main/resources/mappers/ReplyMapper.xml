@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.goboogie.repository.reply.ReplyMapper">
+
+    <!-- ReplyResultMap: Reply 객체와 데이터베이스 테이블의 컬럼을 매핑 -->
+    <resultMap id="ReplyResultMap" type="project.goboogie.domain.Reply">
+        <id property="replyId" column="reply_id"/>
+        <result property="commentId" column="comment_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="replyText" column="reply_text"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <!-- save: Reply 객체를 데이터베이스에 저장 -->
+    <insert id="save" parameterType="project.goboogie.domain.Reply">
+        INSERT INTO replies (comment_id, user_id, reply_text, created_at)
+        VALUES (#{commentId}, #{userId}, #{replyText}, NOW())
+    </insert>
+
+    <!-- findById: replyId로 Reply 객체를 조회 -->
+    <select id="findById" parameterType="int" resultMap="ReplyResultMap">
+        SELECT * FROM replies WHERE reply_id = #{replyId}
+    </select>
+
+    <!-- findByCommentId: commentId로 Reply 목록을 조회 -->
+    <select id="findByCommentId" parameterType="int" resultMap="ReplyResultMap">
+        SELECT * FROM replies WHERE comment_id = #{commentId}
+    </select>
+
+    <!-- findAll: 모든 Reply 객체를 조회 -->
+    <select id="findAll" resultMap="ReplyResultMap">
+        SELECT * FROM replies
+    </select>
+
+    <!-- update: Reply 객체를 업데이트 -->
+    <update id="update" parameterType="project.goboogie.domain.Reply">
+        UPDATE replies
+        SET comment_id = #{commentId}, user_id = #{userId}, reply_text = #{replyText}, created_at = #{createdAt}
+        WHERE reply_id = #{replyId}
+    </update>
+
+    <!-- deleteById: replyId로 Reply 객체를 삭제 -->
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM replies WHERE reply_id = #{replyId}
+    </delete>
+
+</mapper>

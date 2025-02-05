@@ -10,4 +10,9 @@ public class Like {
     private int postId;
     private int userId;
     private LocalDateTime createdAt;
+
+    public Like(int postId, int userId) {
+        this.postId = postId;
+        this.userId = userId;
+    }
 }
