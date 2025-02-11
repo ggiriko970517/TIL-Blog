@@ -7,19 +7,23 @@ import './App.css';
 // import BookMark from './pages/BookMark';
 import NewHome from './pages/NewHome';
 import Header from './components/Header';
+import BlogEditor from './pages/BlogEditor';
+import MySetting from './pages/MySetting';
 
 
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
        {/* <HeaderBar /> */}
        {/* <Home /> */}
-        <NewHome />
+        {/* <NewHome /> */}
         {/* <BookMark /> */}
          {/* <Alarm /> */}
       {/*  <Footer />  */}
+      {/* <BlogEditor/> */}
+      <MySetting/>
 
 
 
