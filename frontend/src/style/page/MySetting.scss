@@ -1,0 +1,106 @@
+.my-setting-container {
+  display: flex;
+  flex-direction: column; /* 세로 레이아웃 */
+  min-height: 100vh; /* 전체 화면 높이를 차지 */
+  width: 100%;
+
+  .content-wrapper {
+    flex: 1; /* 콘텐츠가 Footer를 밀어냄 */
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+
+    /* Profile 영역 */
+    .profile-col {
+      flex: 1; /* 비율 조정 */
+      padding: 20px;
+      border-right: 1px solid #ccc; /* Profile 영역 구분 */
+    }
+
+    /* Blog 정보 영역 */
+    .blog-info-col {
+      flex: 2; /* 비율 조정 */
+      padding: 20px;
+      width: 100%;
+      max-width: 890px;
+    }
+  }
+
+  /* Setting 아이콘 영역 */
+  .setting {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin: 30px 20px;
+    border-bottom: 2px solid rgb(202, 202, 202);
+
+    .icon {
+      img {
+        width: 128px;
+        height: 128px;
+        object-fit: contain;
+        margin-left: 45px;
+        animation: rollIn 2s;
+      }
+    }
+
+    .bottom {
+      margin-left: 25px;
+      font-size: 4rem;
+      font-weight: bold;
+      cursor: pointer;
+      -webkit-text-stroke: 2px black;
+      background-image: linear-gradient(0deg, #F86A38, #F86A38);
+      -webkit-background-clip: text;
+      color: transparent;
+      background-repeat: no-repeat;
+      transition: background-size 0.2s ease-in;
+
+      &:hover {
+        background-size: 100% 100%;
+        filter: drop-shadow(0 0 5px #DDEADD);
+      }
+    }
+  }
+
+  /* Footer 스타일 */
+  .footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+    width: 100%;
+  }
+
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .content-wrapper {
+      flex-direction: column; /* 세로 레이아웃으로 변경 */
+      gap: 10px;
+
+      .profile-col {
+        border-right: none;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .blog-info-col {
+        max-width: 100%; /* 가로 크기 제한 해제 */
+      }
+    }
+
+    .setting {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .icon img {
+        margin-left: 0;
+      }
+
+      .bottom {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  }
+}

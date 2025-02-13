@@ -1,0 +1,110 @@
+.blogintro {
+  width: 300px;
+  /* 가로 크기 고정 */
+  margin: 20px auto;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  /* 배경색 추가 */
+
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .intro-display {
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: normal;
+    /* 줄바꿈 허용 */
+    word-wrap: break-word;
+    /* 긴 단어 줄바꿈 */
+    padding-bottom: 30px;
+    /* Edit 버튼과의 간격 */
+    height: auto;
+
+    p {
+      margin: 0;
+    }
+
+    .edit-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      padding: 4px 8px;
+      font-size: 12px;
+      background-color: #007bff;
+      /* 배경색 추가 */
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #0056b3;
+        /* 버튼 호버 시 색상 변경 */
+      }
+
+      &:active {
+        background-color: #004494;
+        /* 버튼 클릭 시 색상 변경 */
+      }
+    }
+  }
+
+  .intro-edit {
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      /* 최소 높이 */
+      max-height: 200px;
+      /* 최대 높이 제한 */
+      resize: vertical;
+      /* 세로 방향으로만 크기 조절 가능 */
+      padding: 8px;
+      font-size: 14px;
+      overflow-y: auto;
+      /* 스크롤 가능 (세로 제한) */
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 12px;
+      margin-top: 5px;
+      color: #666;
+      /* 글자 수 표시 색상 추가 */
+    }
+
+    .save-btn {
+      align-self: flex-end;
+      margin-top: 5px;
+      padding: 6px 12px;
+      font-size: 12px;
+      background-color: #28a745;
+      /* 배경색 추가 */
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #218838;
+        /* 버튼 호버 시 색상 변경 */
+      }
+
+      &:active {
+        background-color: #1e7e34;
+        /* 버튼 클릭 시 색상 변경 */
+      }
+    }
+  }
+}
