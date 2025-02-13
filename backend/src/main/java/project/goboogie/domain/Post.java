@@ -10,14 +10,14 @@ public class Post {
     private int userId; // 작성자 ID
     private String title; // 게시글 제목
     private String content; // 게시글 내용
-    private String thumbnailUrl; // 썸네일 URL
+
     private LocalDateTime createdAt; // 생성 시간
     private LocalDateTime updatedAt; // 업데이트 시간
 
-    public Post(int userId, String title, String content, String thumbnailUrl) {
+    public Post(int userId, String title, String content) {
         this.userId = userId;
         this.title = title;
         this.content = content;
-        this.thumbnailUrl = thumbnailUrl; // 썸네일 URL 설정
+
     }
 }

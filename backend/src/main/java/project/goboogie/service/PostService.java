@@ -33,7 +33,7 @@ public class PostService {
         if (!user.isPresent()) {
             throw new IllegalArgumentException("유저가 존재하지 않습니다.");
         }
-        Post post = new Post(createPostDTO.getUserId(), createPostDTO.getTitle(), createPostDTO.getContent(), createPostDTO.getThumbnailUrl());
+        Post post = new Post(createPostDTO.getUserId(), createPostDTO.getTitle(), createPostDTO.getContent());
         // Post 객체를 저장하고 반환된 Post 객체에서 postId를 가져옴
         Post savedPost = postRepository.save(post);
         int postId = savedPost.getPostId();

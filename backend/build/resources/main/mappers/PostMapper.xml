@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.goboogie.repository.post.PostMapper">
+
+    <resultMap id="PostResultMap" type="project.goboogie.domain.Post">
+        <id property="postId" column="post_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <insert id="save" parameterType="project.goboogie.domain.Post" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO posts (user_id, title, content, created_at, updated_at)
+        VALUES (#{userId}, #{title}, #{content}, NOW(), NOW())
+    </insert>
+
+    <select id="findById" parameterType="int" resultMap="PostResultMap">
+        SELECT * FROM posts WHERE post_id = #{postId}
+    </select>
+
+    <select id="findAll" resultMap="PostResultMap">
+        SELECT * FROM posts
+    </select>
+
+    <update id="update" parameterType="project.goboogie.domain.Post">
+        UPDATE posts
+        SET title = #{title}, content = #{content}, updated_at = NOW()
+        WHERE post_id = #{postId}
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM posts WHERE post_id = #{postId}
+    </delete>
+
+    <!-- 좋아요가 가장 많은 게시글 5개 가져오기 -->
+    <select id="findTopPostsByLikes" resultMap="PostResultMap">
+        SELECT p.*
+        FROM posts p
+        LEFT JOIN (
+        SELECT post_id, COUNT(*) AS like_count
+        FROM likes
+        GROUP BY post_id
+        ) l ON p.post_id = l.post_id
+        ORDER BY l.like_count DESC, p.created_at DESC
+        LIMIT 5
+    </select>
+
+</mapper>
