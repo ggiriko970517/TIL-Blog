@@ -38,16 +38,81 @@
     </delete>
 
     <!-- 좋아요가 가장 많은 게시글 5개 가져오기 -->
-    <select id="findTopPostsByLikes" resultMap="PostResultMap">
-        SELECT p.*
+    <resultMap id="PostWithMediaResultMap" type="project.goboogie.dto.PostWithMediaDTO">
+        <id property="postId" column="post_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="mediaId" column="media_id"/>
+        <result property="mediaUrl" column="media_url"/>
+        <result property="mediaType" column="media_type"/>
+        <result property="mediaCreatedAt" column="media_created_at"/>
+        <result property="likeCount" column="like_count"/> <!-- 추가 -->
+        <result property="commentCount" column="comment_count"/> <!-- 추가 -->
+    </resultMap>
+
+
+    <select id="findTopPostsByLikes" resultMap="PostWithMediaResultMap">
+        SELECT
+        p.post_id,
+        p.user_id,
+        p.title,
+        p.content,
+        p.created_at,
+        p.updated_at,
+        m.media_id,
+        m.media_url,
+        m.media_type,
+        m.created_at AS media_created_at
         FROM posts p
         LEFT JOIN (
         SELECT post_id, COUNT(*) AS like_count
         FROM likes
         GROUP BY post_id
         ) l ON p.post_id = l.post_id
+        LEFT JOIN media m ON p.post_id = m.post_id
         ORDER BY l.like_count DESC, p.created_at DESC
         LIMIT 5
     </select>
+
+    <!-- 최근게시글 가져오기 created_at을 기준으로 정렬하여 최신 게시글을 가져오는 쿼리-->
+    <select id="findRecentPosts" resultMap="PostWithMediaResultMap">
+        SELECT
+        p.post_id,
+        p.user_id,
+        p.title,
+        p.content,
+        p.created_at,
+        p.updated_at,
+        m.media_id,
+        m.media_url,
+        m.media_type,
+        m.created_at AS media_created_at,
+        COALESCE(l.like_count, 0) AS like_count,
+        COALESCE(c.comment_count, 0) AS comment_count
+        FROM posts p
+        LEFT JOIN media m ON p.post_id = m.post_id
+        LEFT JOIN (
+        SELECT post_id, COUNT(*) AS like_count
+        FROM likes
+        GROUP BY post_id
+        ) l ON p.post_id = l.post_id
+        LEFT JOIN (
+        SELECT post_id, COUNT(*) AS comment_count
+        FROM comments
+        GROUP BY post_id
+        ) c ON p.post_id = c.post_id
+        <where>
+            <if test="title != null and title != ''">
+                AND p.title LIKE CONCAT('%', #{title}, '%')
+            </if>
+        </where>
+        ORDER BY p.created_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+
 
 </mapper>

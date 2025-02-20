@@ -6,6 +6,7 @@ import project.goboogie.domain.Media;
 import project.goboogie.domain.Post;
 import project.goboogie.domain.User;
 import project.goboogie.dto.CreatePostDTO;
+import project.goboogie.dto.PostWithMediaDTO;
 import project.goboogie.repository.media.MediaRepository;
 import project.goboogie.repository.post.PostRepository;
 import project.goboogie.repository.user.UserRepository;
@@ -60,7 +61,12 @@ public class PostService {
     }
 
     // 좋아요가 가장 많은 게시글 순서대로 가져오기
-    public List<Post> findTopPostsByLikes() {
+    public List<PostWithMediaDTO> findTopPostsByLikes() {
         return postRepository.findTopPostsByLikes();
+    }
+
+    //최근 게시글을 가져오는 메서드
+    public List<PostWithMediaDTO> findRecentPosts(String title, int page, int size) {
+        return postRepository.findRecentPosts(title, page, size);
     }
 }

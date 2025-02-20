@@ -3,6 +3,7 @@ package project.goboogie.repository.post;
 import project.goboogie.domain.Post;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+import project.goboogie.dto.PostWithMediaDTO;
 import project.goboogie.repository.post.PostMapper;
 
 import java.util.List;
@@ -45,7 +46,13 @@ public class PostRepository {
     }
 
     // 좋아요가 가장 많은 게시글 순서대로 가져오기
-    public List<Post> findTopPostsByLikes() {
+    public List<PostWithMediaDTO> findTopPostsByLikes() {
         return postMapper.findTopPostsByLikes();
+    }
+
+     //최근 게시글 가져오기
+     public List<PostWithMediaDTO> findRecentPosts(String title, int page, int size) {
+         int offset = (page - 1) * size;
+         return postMapper.findRecentPosts(title, size, offset);
     }
 }
