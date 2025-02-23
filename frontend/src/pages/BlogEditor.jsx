@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
+import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import "../style/BlogEditor/BlogEditor.scss";
 
 const BlogEditor = () => {
-  const [tags, setTags] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [title, setTitle] = useState("");
   const [editorContent, setEditorContent] = useState("");
-  const [thumbnail, setThumbnail] = useState(null); // 썸네일 이미지 상태 추가
-  const [textCount, setTextCount] = useState({
-    total: 0,
-    korean: 0,
-    english: 0,
-    numbers: 0,
-  });
+  const [thumbnail, setThumbnail] = useState(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState("");
 
   const quillModules = {
     toolbar: {
@@ -40,96 +35,103 @@ const BlogEditor = () => {
     "video",
   ];
 
-  // 썸네일 이미지 변경 핸들러
+  // 썸네일 선택 시 처리
   const handleThumbnailChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setThumbnail(imageUrl);
+    if (!file) return;
+    setThumbnail(file);
+    setThumbnailUrl(URL.createObjectURL(file)); // 미리보기 URL 생성
+  };
+
+  // 포스트 제출
+  const handlePostSubmit = async () => {
+    if (!title.trim()) {
+      alert("제목을 입력하세요.");
+      return;
     }
+    if (!editorContent.trim()) {
+      alert("내용을 입력하세요.");
+      return;
+    }
+    if (!thumbnail) {
+      alert("썸네일을 업로드하세요.");
+      return;
+    }
+
+    // FormData 생성
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", editorContent);
+    formData.append("userId", 37); // 임의 사용자 ID
+    formData.append("thumbnail", thumbnail);
+
+    try {
+      await axios.post("http://localhost:8080/posts", formData);
+      alert("포스팅이 성공적으로 등록되었습니다!");
+      setTitle("");
+      setEditorContent("");
+      setThumbnail(null);
+      setThumbnailUrl("");
+    } catch (error) {
+      console.error("포스팅 실패:", error);
+      alert("포스팅 중 오류가 발생했습니다.")
   };
 
   return (
-    <div className="all">
-      <div className="post-page">
-        <div className="text-count">
-          전체 <span className="count-number">{textCount.total}</span>자
-          한글 <span className="count-number">{textCount.korean}</span>자
-          영어 <span className="count-number">{textCount.english}</span>자
-          숫자 <span className="count-number">{textCount.numbers}</span>자
+      <div className="blog-editor">
+        <div className="blog-editor__top">
+          <button className="blog-editor__button" onClick={handlePostSubmit}>
+            포스팅
+          </button>
         </div>
 
-        <div className="top-button">
-          <button className="post-button">포스팅</button>
-        </div>
+        <div className="blog-editor__title-thumbnail">
+          <input
+              type="text"
+              className="blog-editor__title"
+              placeholder="제목을 입력하세요."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+          />
 
-        {/* 제목 & 썸네일 미리보기 컨테이너 */}
-        <div className="title-thumbnail-container">
-          <div className="title-box">
-            <input type="text" className="title" placeholder="제목을 입력하세요." />
-          </div>
-
-          {/* 썸네일 미리보기 */}
-          <div className="thumbnail-preview">
-            {thumbnail ? (
-              <img src={thumbnail} alt="썸네일 미리보기" className="thumbnail-image" />
+          <div
+              className="blog-editor__thumbnail"
+              onClick={() => document.getElementById("thumbnail-input").click()}
+          >
+            {thumbnailUrl ? (
+                <img
+                    src={thumbnailUrl}
+                    alt="썸네일 미리보기"
+                    className="blog-editor__thumbnail-image"
+                />
             ) : (
-              <div className="thumbnail-placeholder">이미지 추가</div>
+                <div className="blog-editor__thumbnail-placeholder">
+                  이미지 추가
+                </div>
             )}
             <input
-              type="file"
-              accept="image/*"
-              className="thumbnail-input"
-              onChange={handleThumbnailChange}
+                id="thumbnail-input"
+                type="file"
+                accept="image/*"
+                className="blog-editor__thumbnail-input"
+                onChange={handleThumbnailChange}
             />
           </div>
         </div>
 
-        {/* 태그 입력 */}
-        <div className="tag-input-container">
-          {tags.map((tag, index) => (
-            <div className="tag-box" key={index}>
-              {tag}
-              <button className="remove-tag" onClick={() => setTags(tags.filter(t => t !== tag))}>
-                &times;
-              </button>
-            </div>
-          ))}
-          <input
-            type="text"
-            value={inputValue}
-            placeholder="태그는 #으로 시작해야 합니다."
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === ",") {
-                e.preventDefault();
-                const newTag = inputValue.trim();
-                if (newTag.startsWith("#") && !tags.includes(newTag)) {
-                  setTags([...tags, newTag]);
-                  setInputValue("");
-                } else if (!newTag.startsWith("#")) {
-                  alert("태그는 #으로 시작해야 합니다.");
-                }
-              }
-            }}
-            className="tag-input"
-          />
-        </div>
-
-        {/* 에디터 */}
-        <div className="quill-editor-container">
+        <div className="blog-editor__quill">
           <ReactQuill
-            value={editorContent}
-            onChange={setEditorContent}
-            modules={quillModules}
-            formats={quillFormats}
-            placeholder="내용을 작성하세요."
-            className="quill-editor"
+              value={editorContent}
+              onChange={setEditorContent}
+              modules={quillModules}
+              formats={quillFormats}
+              placeholder="내용을 작성하세요."
           />
         </div>
       </div>
-    </div>
   );
 };
 
 export default BlogEditor;
+
+
