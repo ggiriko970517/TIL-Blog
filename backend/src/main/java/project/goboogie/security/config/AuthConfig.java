@@ -28,10 +28,10 @@ public class AuthConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger", "/auth/**", "/social/**", "/posts/**", "/likes/**"); // Swagger 경로 허용
-    }
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return (web) -> web.ignoring().requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger", "/auth/**", "/social/**", "/posts/**", "/likes/**", "/common/**", "/uploads/**"); // Swagger 경로 허용
+//    }
 
     @Bean
     public DefaultWebSecurityExpressionHandler customWebSecurityExpressionHandler() {
@@ -41,18 +41,18 @@ public class AuthConfig {
     }
 
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http.csrf(csrf -> csrf.disable())
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/auth/**").permitAll() // /auth/** 경로를 허용
-//                        .anyRequest().authenticated()
-//                )
-//                .addFilterBefore(jwtAuthenticationFilter, BasicAuthenticationFilter.class) // BasicAuthenticationFilter 앞에 추가
-//                .formLogin(form -> form.disable());
-//
-//        return http.build();
-//    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/swagger-ui/**", "/api-docs/**", "/swagger", "/auth/**", "/social/**", "/posts/**", "/likes/**", "/common/**", "/uploads/**").permitAll() // /auth/** 경로를 허용
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(jwtAuthenticationFilter, BasicAuthenticationFilter.class) // BasicAuthenticationFilter 앞에 추가
+                .formLogin(form -> form.disable());
+
+        return http.build();
+    }
 
 //    @Bean
 //    public CorsConfigurationSource corsConfigurationSource() {
