@@ -1,7 +1,21 @@
+// 색상 및 공통 스타일 변수
+$primary-color: #333;
+$secondary-color: #444;
+$light-color: #666;
+$border-color: #eee;
+$bg-color: #fff;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$border-radius: 10px;
+
 .content-wrapper {
   display: flex;
   gap: 30px;
   padding: 20px;
+
+  // 반응형 디자인
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .content {
@@ -10,13 +24,13 @@
   h2 {
     font-size: 2rem;
     margin-bottom: 10px;
-    color: #333;
+    color: $primary-color;
   }
 
   p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #444;
+    color: $secondary-color;
     margin-bottom: 20px;
   }
 
@@ -24,9 +38,9 @@
     width: 100%;
     max-height: 400px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: $border-radius;
     margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow;
   }
 }
 
@@ -35,25 +49,37 @@
   position: sticky;
   top: 20px;
 
+  // 반응형 디자인
+  @media (max-width: 1200px) {
+    width: 250px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: relative;
+    top: auto;
+  }
+
   h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
+    color: $primary-color;
   }
 
   .recent-post-item {
     margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid $border-color;
     padding-bottom: 10px;
 
     h4 {
       font-size: 1.2rem;
-      color: #333;
+      color: $primary-color;
       margin-bottom: 5px;
     }
 
     p {
       font-size: 0.9rem;
-      color: #666;
+      color: $light-color;
       margin-bottom: 5px;
     }
 
@@ -63,6 +89,7 @@
       object-fit: cover;
       border-radius: 5px;
       margin-top: 10px;
+      box-shadow: $box-shadow;
     }
   }
 }
@@ -74,15 +101,28 @@
 
   button {
     padding: 5px 10px;
-    border: 1px solid #ddd;
-    background-color: #fff;
+    border: 1px solid $border-color;
+    background-color: $bg-color;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.2s;
 
     &:hover {
       background-color: #f1f1f1;
     }
   }
 }
+
+.post {
+  margin-bottom: 40px;
+
+  .comment-section {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+  }
+}
+
+
 
 
