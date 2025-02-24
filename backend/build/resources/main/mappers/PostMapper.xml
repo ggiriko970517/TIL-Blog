@@ -77,7 +77,9 @@
         LIMIT 5
     </select>
 
-    <!-- 최근게시글 가져오기 created_at을 기준으로 정렬하여 최신 게시글을 가져오는 쿼리-->
+
+
+<!--    토큰 좋아요-->
     <select id="findRecentPosts" resultMap="PostWithMediaResultMap">
         SELECT
         p.post_id,
@@ -91,7 +93,11 @@
         m.media_type,
         m.created_at AS media_created_at,
         COALESCE(l.like_count, 0) AS like_count,
-        COALESCE(c.comment_count, 0) AS comment_count
+        COALESCE(c.comment_count, 0) AS comment_count,
+        CASE
+        WHEN #{userId} IS NOT NULL AND ul.user_id IS NOT NULL THEN true
+        ELSE false
+        END AS likedByUser
         FROM posts p
         LEFT JOIN media m ON p.post_id = m.post_id
         LEFT JOIN (
@@ -104,6 +110,7 @@
         FROM comments
         GROUP BY post_id
         ) c ON p.post_id = c.post_id
+        LEFT JOIN likes ul ON p.post_id = ul.post_id AND ul.user_id = #{userId}
         <where>
             <if test="title != null and title != ''">
                 AND p.title LIKE CONCAT('%', #{title}, '%')
@@ -112,7 +119,6 @@
         ORDER BY p.created_at DESC
         LIMIT #{size} OFFSET #{offset}
     </select>
-
 
 
 </mapper>
