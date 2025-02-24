@@ -65,8 +65,9 @@ public class PostService {
         return postRepository.findTopPostsByLikes();
     }
 
-    //최근 게시글을 가져오는 메서드
-    public List<PostWithMediaDTO> findRecentPosts(String title, int page, int size) {
-        return postRepository.findRecentPosts(title, page, size);
+    // 토큰이 있을 때/ 없을 때,  좋아요 표시
+    public List<PostWithMediaDTO> findRecentPosts(String title, int page, int size, Integer userId) {
+        return postRepository.findRecentPosts(title, page, size, userId);
     }
+
 }

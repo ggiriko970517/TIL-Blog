@@ -50,4 +50,8 @@
         SELECT COUNT(*) > 0 FROM users WHERE email = #{email}
     </select>
 
+    <select id="findByEmail" parameterType="string" resultMap="UserResultMap">
+        SELECT * FROM users WHERE email = #{email} LIMIT 1
+    </select>
+
 </mapper>

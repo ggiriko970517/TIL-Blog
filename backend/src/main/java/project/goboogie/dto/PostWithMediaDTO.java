@@ -1,5 +1,6 @@
 package project.goboogie.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Data
 public class PostWithMediaDTO {
     private int postId;
     private int userId;
@@ -14,10 +16,11 @@ public class PostWithMediaDTO {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Integer mediaId;
+    private int mediaId;
     private String mediaUrl;
     private String mediaType;
     private LocalDateTime mediaCreatedAt;
-    private int likeCount;   // 추가
-    private int commentCount; // 추가
+    private int likeCount;
+    private int commentCount;
+    private boolean likedByUser; // 사용자 좋아요 여부 추가
 }

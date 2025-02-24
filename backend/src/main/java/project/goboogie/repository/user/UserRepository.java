@@ -50,5 +50,10 @@ public class UserRepository {
     public boolean existsByEmail(String email) {
         return userMapper.existsByEmail(email);
     }
+
+    public Optional<User> findByEmail(String email) {
+        return userMapper.findByEmail(email);
+    }
+
 }
 

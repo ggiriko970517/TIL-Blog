@@ -1,11 +1,15 @@
 package project.goboogie.controller;
 
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import project.goboogie.domain.Post;
 import project.goboogie.dto.CreatePostDTO;
 import project.goboogie.dto.PostWithMediaDTO;
+import project.goboogie.security.jwt.JwtTokenProvider;
 import project.goboogie.service.PostService;
 
 import java.util.List;
@@ -16,9 +20,13 @@ import java.util.Optional;
 public class PostController {
 
     private final PostService postService;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public PostController(PostService postService) {
+
+    @Autowired
+    public PostController(PostService postService, JwtTokenProvider jwtTokenProvider) {
         this.postService = postService;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @PostMapping
@@ -59,14 +67,31 @@ public class PostController {
         return ResponseEntity.ok(topPosts);
     }
 
-    // 최신 게시글 + 검색 & 페이징 적용
+
+
+
+
+
+
+    // 최신 게시글 + 검색 & 페이징 적용,  토큰이 있을 때/ 없을 때,  좋아요 표시
     @GetMapping("/recent")
     public ResponseEntity<List<PostWithMediaDTO>> findRecentPosts(
         @RequestParam(required = false) String title,
         @RequestParam(defaultValue = "1") int page,
-        @RequestParam(defaultValue = "8") int size) {
-//?page=2&size=8   2페이지(8개) 조회
-        List<PostWithMediaDTO> recentPosts = postService.findRecentPosts(title, page, size);
+        @RequestParam(defaultValue = "8") int size,
+        HttpServletRequest request
+    ) {
+        String token = jwtTokenProvider.resolveToken(request);
+        Integer userId = null;
+
+        if (token != null) {
+            Claims claims = jwtTokenProvider.getClaimsFromToken(token);
+            userId = claims.get("userID", Integer.class);
+        }
+
+        List<PostWithMediaDTO> recentPosts = postService.findRecentPosts(title, page, size, userId);
         return ResponseEntity.ok(recentPosts);
     }
+
+
 }

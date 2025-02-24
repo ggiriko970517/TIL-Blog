@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserMapper {
     void save(User user);
     Optional<User> findById(@Param("userId") Integer userId);
+    Optional<User> findByEmail(@Param("email") String email);
     List<User> findAll();
     List<User> findLikeUsersByPostId(Integer postId); // 특정 게시글을 좋아요한 사용자 목록 조회
     void update(User user);
