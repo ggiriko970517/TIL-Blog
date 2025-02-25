@@ -1,0 +1,61 @@
+.footer-container {
+    position: relative;
+    width: 100%;
+    background-color: #256edc;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+  
+  .footer-contents {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* 파도 애니메이션 컨테이너 */
+  .wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+  }
+  
+  /* 파도 애니메이션 */
+  .wave {
+    position: absolute;
+    width: 200%;
+    height: 100px;
+    background: url('../../components/common/wave.png') repeat-x;  /* 절대 경로 적용 */
+    background-size: contain;
+    animation: waveAnimation 50s infinite linear;
+    opacity: 0.6;
+  }
+  
+  /* 두 번째 파도를 조금 다르게 움직이도록 설정 */
+  .wave2 {
+    top: 20px;
+    animation: waveAnimation2 30s infinite linear;
+    opacity: 0.6;
+  }
+  
+  @keyframes waveAnimation {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes waveAnimation2 {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
