@@ -1,4 +1,5 @@
 import './App.css';
+import Footer from './components/Footer';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Content from './components/MyBlog/Content';
@@ -13,8 +14,9 @@ import SiteFooter from './components/SiteFooter';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
-
 function App() {
+  // ✅ 포스팅 데이터를 상태로 관리
+  const [posts, setPosts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -37,41 +39,28 @@ function App() {
     localStorage.removeItem('userName');
     setIsLoggedIn(false);
   };
-  
+
+  // ✅ 새로운 포스팅 추가 함수
+  const addPost = (newPost) => {
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
+  };
+
   return (
     <div className="App">
       <Router>
-      <div className="App">
         <SiteHeader isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <Header />  {/* ✅ 공통 Header 추가 */}
         <Routes>
           <Route path="/" element={<SiteHome />} />
-          {/* <Route path="/write" element={<SiteWrite />} /> */}
-          {/* <Route path="/profile" element={<SiteSetting />} /> */}
+          <Route path="/write" element={<BlogEditor addPost={addPost} />} />
+          <Route path="/myblog" element={<MyBlog posts={posts} />} />
+          <Route path="/settings" element={<MySetting />} />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <SiteFooter />
-      </div>
-    </Router>
-        {/*<Router>*/}
-        {/*    <Routes>*/}
-        {/*        /!*<Route path="/" element={<NewHome />} />*!/*/}
-        {/*        <Route path="/myblog" element={<MyBlog />} />*/}
-        {/*        <Route path="/editor" element={<BlogEditor />} />*/}
-        {/*    </Routes>*/}
-        {/*</Router>*/}
-      {/* <Header /> */}
-       {/* <HeaderBar /> */}
-       {/* <Home /> */}
-        {/* <NewHome /> */}
-        {/* <BookMark /> */}
-         {/* <Alarm /> */}
-      {/*  <Footer />  */}
-       {/* <BlogEditor/> */}
-      {/*<MySetting/>*/}
-
-
-
+        <Footer />
+      </Router>
     </div>
   );
 }
