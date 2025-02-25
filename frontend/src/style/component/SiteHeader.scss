@@ -1,0 +1,134 @@
+@import 'animate.css';
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(45deg, rgb(65, 210, 179), rgb(25, 117, 140));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+}
+
+.logo {
+    margin-left: 50px;
+    transition: transform 0.3s 
+}
+.logo:hover {
+    transform: scale(1.1);
+}
+
+
+
+.nav-buttons {
+    display: flex;
+    align-items: center; // 추가: 수직 중앙 정렬을 위한 속성
+    gap: 40px; // 버튼 사이의 간격
+    margin-right: 50px; // 오른쪽 끝에서 약간의 여백
+}
+
+//새글쓰기
+.nav-button {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    
+    .posting-icon{
+        transition: transform 0.3s 
+        
+    }
+}
+#posting-icon:hover{
+    transform: scale(1.3);
+    color: #292929;
+}
+
+
+
+
+#posting-icon, #profile-icon {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    text-decoration: underline;
+}
+
+.profile-dropdown {
+    position: relative;
+}
+
+.dropdown {
+    .dropdown {
+             width: 150px;
+             text-align: left;
+            position: absolute;
+               top: 50px;
+               right: 0;
+             background-color: white;
+              border: 1px solid #ccc;
+               border-radius: 4px;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+               overflow: hidden;
+              z-index: 99999;
+               font-weight: bold;
+              font-size: 22px;
+}
+}
+
+.dropdown a {
+    display: block;
+         padding: 10px 15px;
+         color: #333;
+        text-decoration: none;
+}
+
+.dropdown a:hover {
+    background-color: #f0f0f0;
+         color:#00897b;
+ 
+}
+
+//로그인 버튼 
+
+.login-button{
+      position:relative;
+      margin-bottom: 10px;
+
+    .login-btn {
+       
+        // font-family: sans-serif;
+        font-weight: bold;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        &:hover {
+            background-color: #7aee7e;
+            transform: scale(1.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        // &:active {
+        //     background-color: #e95b09;
+        //     transform: translateY(2px) scale(1.28); 
+        //     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        // }
+      }
+
+     
+
+}
