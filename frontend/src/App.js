@@ -49,7 +49,8 @@ function App() {
     <div className="App">
       <Router>
         <SiteHeader isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        {/* <Header />   */}
+
+
         <Routes>
           <Route path="/" element={<SiteHome />} />
           <Route path="/write" element={<BlogEditor addPost={addPost} />} />
@@ -58,8 +59,9 @@ function App() {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
-        {/* <SiteFooter /> */}
-        {/* <Footer /> */}
+
+        <SiteFooter />
+
       </Router>
     </div>
   );

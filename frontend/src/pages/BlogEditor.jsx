@@ -207,3 +207,7 @@ const BlogEditor = ({ addPost }) => { // ✅ addPost를 props로 받음
 
 export default BlogEditor;
 
+
+
+
+
