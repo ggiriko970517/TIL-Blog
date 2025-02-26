@@ -41,6 +41,8 @@ public class PostController {
         return post.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+// thumnail 추가해서 보여줘야 되는 부분
+
     @GetMapping
     public ResponseEntity<List<Post>> getAllPosts() {
         List<Post> posts = postService.getAllPosts();
