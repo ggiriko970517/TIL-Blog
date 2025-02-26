@@ -49,7 +49,6 @@ function App() {
     <div className="App">
       <Router>
         <SiteHeader isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Header />  {/* ✅ 공통 Header 추가 */}
         <Routes>
           <Route path="/" element={<SiteHome />} />
           <Route path="/write" element={<BlogEditor addPost={addPost} />} />
@@ -59,7 +58,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <SiteFooter />
-        <Footer />
       </Router>
     </div>
   );

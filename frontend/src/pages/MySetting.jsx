@@ -9,7 +9,6 @@ const Settingicon = '/components/common/Setting_icon.png';
 
 const MySetting = () => (
   <div className="my-setting-container">
-    <Header />
 
     <div className="setting">
       <div className="icon">
