@@ -27,6 +27,7 @@
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1001;
+  
 }
 
 .close-btn {
@@ -66,7 +67,12 @@
   cursor: pointer;
   font-size: 1rem;
   margin-top: 10px;
+  transition: background-color 0.3s ease; 
+  &:hover {
+    background-color: #67ca6c; /* 호버 시 변경될 색상 */
+  }
 }
+
 
 .signup-link {
   color: #4caf50;
@@ -75,6 +81,11 @@
   cursor: pointer;
   text-decoration: underline;
   font-size: 0.9rem;
+  transition: color 0.2s ease;
+  &:hover{
+    text-decoration: underline;
+    color:rgb(51, 51, 231);
+  }
 }
 
 

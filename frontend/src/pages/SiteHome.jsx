@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import DefaultImage from '../components/common/Image_Not_Found.png';
 import DefaultProfile from '../components/common/profile.png';
 import { debounce } from 'lodash';
+import SiteFooter from '../components/SiteFooter';
 
 const API_URL = 'http://localhost:8080/posts/top-likes';
 const RECENT_POSTS_API_URL = 'http://localhost:8080/posts/recent';
@@ -119,6 +120,7 @@ function SiteHome() {
                         </div>
                     </div>
                 </div>
+                <SiteFooter/>
             </div>
         </div>
     );

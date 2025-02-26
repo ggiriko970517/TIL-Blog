@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "animate.css"; // 애니메이션 CSS 추가
 import "../style/page/Login.scss";
 
 const Login = ({ onLogin }) => {
@@ -24,12 +25,12 @@ const Login = ({ onLogin }) => {
     return (
         <div className="login-modal">
             <div className="login-modal-overlay" onClick={() => navigate("/")}></div>
-            <div className="login-modal-content">
+            <div className="login-modal-content animate__animated animate__fadeInUpBig">
                 <button className="close-btn" onClick={() => navigate("/")}>
                     &times;
                 </button>
                 <div className="login-form">
-                    <img src="/common/logo.png" alt="Logo" className="login-logo" />
+                    <img src="./components/common/myImage.png" alt="Logo" className="login-logo" />
                     <h2>로그인</h2>
                     <input
                         type="email"
