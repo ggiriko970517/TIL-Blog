@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import "animate.css"; // 애니메이션 CSS 추가
 import "../style/page/Signup.scss";
 
 const Signup = () => {
@@ -43,8 +44,8 @@ const Signup = () => {
 
     return (
         <div className="signup-overlay">
-            <div className="signup-container">
-                <button className="close-btn" onClick={() => navigate("/")}>✖</button>
+            <div className="signup-container animate__animated animate__fadeInUpBig">
+                <button className="close-btn " onClick={() => navigate("/")}>✖</button>
                 <div className="signup-header">
                     <img src="/common/myImage.png" alt="Welcome" className="welcome-image" />
                     <h2>회원가입</h2>
