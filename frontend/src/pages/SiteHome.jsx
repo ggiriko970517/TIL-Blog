@@ -86,14 +86,6 @@ function SiteHome() {
             window.location.href = '/login';
             return;
         }
-
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-            alert('로그인 정보가 유효하지 않습니다.');
-            window.location.href = '/login';
-            return;
-        }
-
         try {
             if (likedByUser) {
                 await axios.delete(`${LIKE_API_URL}/post/${postId}/user/37`);
@@ -109,6 +101,7 @@ function SiteHome() {
             console.error('Error toggling like:', error);
         }
     };
+
 
 
     return (
@@ -147,10 +140,14 @@ function SiteHome() {
                                             <span className="nickname">{post.nickname}</span>
                                         </div>
                                         <div className="feed-stats">
-                                            <span className="likes" style={{color: post.likedByUser ? 'red' : 'black'}}>
-                                                {post.likedByUser ? '❤️' : '🤍'} {post.likeCount}
+                                            <span className="likes" style={{
+                                                cursor: isLoggedIn ? 'pointer' : 'not-allowed',
+                                                color: post.likedByUser ? 'red' : 'black'
+                                            }}
+                                                  onClick={() => isLoggedIn && toggleLike(post.postId, post.likedByUser, post.likeCount)}>
+                                                {post.likedByUser ? ':하트2:' : ':흰색_하트:'} {post.likeCount}
                                             </span>
-                                            <span className="comments">💬 {post.commentCount}</span>
+                                            <span className="comments">:말풍선: {post.commentCount}</span>
                                         </div>
                                     </div>
                                 </div>
