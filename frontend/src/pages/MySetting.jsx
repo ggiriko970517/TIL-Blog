@@ -4,8 +4,9 @@ import Bloginfo from '../components/MySetting/Bloginfo';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../style/page/MySetting.scss';
+import SiteFooter from '../components/SiteFooter';
+import Settingicon from '../components/common/Setting_icon.png'; 
 
-const Settingicon = '/components/common/Setting_icon.png';
 
 const MySetting = () => (
   <div className="my-setting-container">
@@ -26,7 +27,8 @@ const MySetting = () => (
       </div>
     </div>
 
-    <Footer />
+    <SiteFooter />
+  
   </div>
 );
 

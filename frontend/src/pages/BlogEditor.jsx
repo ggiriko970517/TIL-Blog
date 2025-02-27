@@ -4,6 +4,7 @@ import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import "../style/BlogEditor/BlogEditor.scss";
 import { useNavigate } from 'react-router-dom';
+import SiteFooter from "../components/SiteFooter";
 
 const BASE_URL = "http://localhost:8080"; // 백엔드 기본 URL
 
@@ -201,6 +202,7 @@ const BlogEditor = ({ addPost }) => { // ✅ addPost를 props로 받음
               placeholder="내용을 작성하세요."
           />
         </div>
+        <SiteFooter/>
       </div>
   );
 };
