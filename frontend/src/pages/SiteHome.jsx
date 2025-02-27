@@ -10,6 +10,7 @@ import DefaultProfile from '../components/common/profile.png';
 import { debounce } from 'lodash';
 import SiteFooter from '../components/SiteFooter';
 
+
 const API_URL = 'http://localhost:8080/posts/top-likes';
 const RECENT_POSTS_API_URL = 'http://localhost:8080/posts/recent';
 const LIKE_API_URL = 'http://localhost:8080/likes';

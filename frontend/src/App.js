@@ -49,8 +49,6 @@ function App() {
     <div className="App">
       <Router>
         <SiteHeader isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-
-
         <Routes>
           <Route path="/" element={<SiteHome />} />
           <Route path="/write" element={<BlogEditor addPost={addPost} />} />

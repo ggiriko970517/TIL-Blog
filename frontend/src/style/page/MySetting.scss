@@ -54,7 +54,9 @@
       -webkit-background-clip: text;
       color: transparent;
       background-repeat: no-repeat;
-      transition: background-size 0.2s ease-in;
+      background-size: 0% 100%; /* 처음에는 숨김 */
+      background-position: left;
+      transition: background-size 0.3s ease-in-out;
 
       &:hover {
         background-size: 100% 100%;
