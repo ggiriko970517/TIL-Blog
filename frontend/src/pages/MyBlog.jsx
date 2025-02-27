@@ -4,6 +4,7 @@ import Profile from '../components/MySetting/Profile';
 import Content from '../components/MyBlog/Content';
 import '../style/MyBlog/MyBlog.scss';
 import Footer from '../components/Footer';
+import SiteFooter from '../components/SiteFooter';
 
 const MyBlog = ({ posts }) => (
     <div>
@@ -13,6 +14,7 @@ const MyBlog = ({ posts }) => (
                 <Content posts={posts} />
             </div>
         </div>
+        <SiteFooter/>
     </div>
 );
 
