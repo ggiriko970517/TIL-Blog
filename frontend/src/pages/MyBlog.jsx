@@ -12,6 +12,8 @@ const MyBlog = () => {
     const { postId } = useParams();
     const [posts, setPosts] = useState([]);
 
+
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {

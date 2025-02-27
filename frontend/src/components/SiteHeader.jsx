@@ -49,7 +49,7 @@ const SiteHeader = ({ isLoggedIn, handleLogout }) => {
                             onClick={toggleDropdown}
                         />
                         <div className="dropdown">
-                            <Link to="/my-blog">My Blog</Link>
+                            <Link to="/myblog">My Blog</Link>
                             <Link to="/settings">설정</Link>
                             <Link to="/login" onClick={handleLogout} className="logout-button">
                                 로그아웃
