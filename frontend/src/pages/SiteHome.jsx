@@ -9,20 +9,47 @@ import DefaultImage from '../components/common/Image_Not_Found.png';
 import DefaultProfile from '../components/common/profile.png';
 import { debounce } from 'lodash';
 import SiteFooter from '../components/SiteFooter';
-
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = 'http://localhost:8080/posts/top-likes';
 const RECENT_POSTS_API_URL = 'http://localhost:8080/posts/recent';
+const MEDIA_API_URL = 'http://localhost:8080/media';
 const LIKE_API_URL = 'http://localhost:8080/likes';
+
+const getMediaUrl = async (mediaId) => {
+    try {
+        const response = await axios.get(`${MEDIA_API_URL}/${mediaId}`);
+        const filePath = response.data.filePath;
+        return filePath ? `http://localhost:8080${filePath}` : DefaultImage;
+    } catch (error) {
+        console.error(`Error fetching media with ID ${mediaId}:`, error);
+        return DefaultImage;
+    }
+};
+
 
 const fetchPosts = async (url) => {
     try {
         const response = await axios.get(url);
-        return response.data.map(post => ({
-            ...post,
-            thumbnailUrl: post.mediaUrl ? `http://localhost:8080${post.mediaUrl}` : DefaultImage,
-            profileImage: post.profileImage ? `http://localhost:8080${post.profileImage}` : DefaultProfile
-        }));
+        const posts = response.data;
+
+        const postsWithThumbnails = await Promise.all(
+            posts.map(async (post) => {
+                const thumbnailUrl = post.mediaId
+                    ? await getMediaUrl(post.mediaId)
+                    : DefaultImage;
+
+                return {
+                    ...post,
+                    thumbnailUrl: post.mediaUrl ? `http://localhost:8080${post.mediaUrl}` : DefaultImage,
+                    profileImage: post.profileImage
+                        ? `http://localhost:8080${post.profileImage}`
+                        : DefaultProfile
+                };
+            })
+        );
+
+        return postsWithThumbnails;
     } catch (error) {
         console.error(`Error fetching posts from ${url}:`, error);
         return [];
@@ -36,6 +63,7 @@ function SiteHome() {
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const pageSize = 8;
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoggedIn(!!localStorage.getItem('token'));
@@ -48,9 +76,20 @@ function SiteHome() {
 
     const debouncedSearch = useCallback(debounce(setSearchTerm, 500), []);
 
+    const handlePostClick = (postId) => {
+        navigate(`/myblog/${postId}`);
+    };
+
     const toggleLike = async (postId, likedByUser, likeCount) => {
         if (!isLoggedIn) {
             alert('로그인이 필요합니다.');
+            window.location.href = '/login';
+            return;
+        }
+
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert('로그인 정보가 유효하지 않습니다.');
             window.location.href = '/login';
             return;
         }
@@ -70,6 +109,7 @@ function SiteHome() {
             console.error('Error toggling like:', error);
         }
     };
+
 
     return (
         <div className="site-home">
@@ -91,21 +131,23 @@ function SiteHome() {
 
                     <div className="bottom-carousel">
                         <div className="search-bar">
-                            <input type="text" className="search-input" placeholder="게시글을 검색하세요..." onChange={e => debouncedSearch(e.target.value)} />
+                            <input type="text" className="search-input" placeholder="게시글을 검색하세요..."
+                                   onChange={e => debouncedSearch(e.target.value)}/>
                         </div>
 
                         <div className="feed-layout">
                             {recentPosts.map(post => (
-                                <div key={post.postId} className="feed-card">
-                                    <img className="feed-thumbnail" src={post.thumbnailUrl} alt={post.title} />
+                                <div key={post.postId} className="feed-card"
+                                     onClick={() => handlePostClick(post.postId)}>
+                                    <img className="feed-thumbnail" src={post.thumbnailUrl} alt={post.title}/>
                                     <div className="feed-content">
                                         <h6>{post.title}</h6>
                                         <div className="feed-user-info">
-                                            <img className="profile-image" src={post.profileImage} alt={post.nickname} />
+                                            <img className="profile-image" src={post.profileImage} alt={post.nickname}/>
                                             <span className="nickname">{post.nickname}</span>
                                         </div>
                                         <div className="feed-stats">
-                                            <span className="likes" style={{ cursor: isLoggedIn ? 'pointer' : 'not-allowed', color: post.likedByUser ? 'red' : 'black' }} onClick={() => isLoggedIn && toggleLike(post.postId, post.likedByUser, post.likeCount)}>
+                                            <span className="likes" style={{color: post.likedByUser ? 'red' : 'black'}}>
                                                 {post.likedByUser ? '❤️' : '🤍'} {post.likeCount}
                                             </span>
                                             <span className="comments">💬 {post.commentCount}</span>
@@ -114,10 +156,12 @@ function SiteHome() {
                                 </div>
                             ))}
                         </div>
-
                         <div className="pagination">
-                            <button className="arrow-button left" onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>←</button>
-                            <button className="arrow-button right" onClick={() => setCurrentPage(prev => prev + 1)}>→</button>
+                            <button className="arrow-button left"
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}>←
+                            </button>
+                            <button className="arrow-button right" onClick={() => setCurrentPage(prev => prev + 1)}>→
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -128,3 +172,5 @@ function SiteHome() {
 }
 
 export default SiteHome;
+
+

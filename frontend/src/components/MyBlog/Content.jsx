@@ -14,8 +14,11 @@ const Content = ({ posts }) => {
         });
     };
 
+    // 단일 포스트인지 확인
+    const isSinglePost = posts.length === 1;
+
     return (
-        <div className="content">
+        <div className={`content ${isSinglePost ? 'single-post-view' : ''}`}>
             {posts.length === 0 ? (
                 <p>포스팅이 없습니다.</p>
             ) : (
@@ -31,11 +34,12 @@ const Content = ({ posts }) => {
                             className="post-content"
                             dangerouslySetInnerHTML={{ __html: post.content }}
                         />
-
                         {/* 댓글 섹션 추가 */}
                         <CommentSection
-                            comments={commentsByPost[post.id] || []}
-                            updateComments={(updatedComments) => updateComments(post.id, updatedComments)}
+                            comments={commentsByPost[post.postId] || []}
+                            updateComments={(updatedComments) =>
+                                updateComments(post.postId, updatedComments)
+                            }
                         />
                     </div>
                 ))
@@ -45,6 +49,7 @@ const Content = ({ posts }) => {
 };
 
 export default Content;
+
 
 
 
