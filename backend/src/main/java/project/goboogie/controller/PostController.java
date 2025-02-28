@@ -36,9 +36,10 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Integer id) {
-        Optional<Post> post = postService.getPostById(id);
-        return post.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<PostWithMediaDTO> getPostById(@PathVariable Integer id) {
+        return postService.getPostById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 // thumnail 추가해서 보여줘야 되는 부분
@@ -69,12 +70,6 @@ public class PostController {
         return ResponseEntity.ok(topPosts);
     }
 
-
-
-
-
-
-
     // 최신 게시글 + 검색 & 페이징 적용,  토큰이 있을 때/ 없을 때,  좋아요 표시
     @GetMapping("/recent")
     public ResponseEntity<List<PostWithMediaDTO>> findRecentPosts(
@@ -95,5 +90,18 @@ public class PostController {
         return ResponseEntity.ok(recentPosts);
     }
 
+    @GetMapping("/my")
+    public ResponseEntity<List<PostWithMediaDTO>> getMyPosts(HttpServletRequest request) {
+        String token = jwtTokenProvider.resolveToken(request);
+        if (token == null) {
+            return ResponseEntity.status(401).build(); // 인증되지 않은 경우
+        }
+
+        Claims claims = jwtTokenProvider.getClaimsFromToken(token);
+        Integer userId = claims.get("userID", Integer.class);
+
+        List<PostWithMediaDTO> myPosts = postService.getPostsByUserId(userId);
+        return ResponseEntity.ok(myPosts);
+    }
 
 }
