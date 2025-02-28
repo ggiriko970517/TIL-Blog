@@ -10,6 +10,9 @@ import DefaultProfile from '../components/common/profile.png';
 import { debounce } from 'lodash';
 import SiteFooter from '../components/SiteFooter';
 import { useNavigate } from 'react-router-dom';
+import { FaHeart, FaRegHeart, FaComment } from 'react-icons/fa';
+
+
 
 const API_URL = 'http://localhost:8080/posts/top-likes';
 const RECENT_POSTS_API_URL = 'http://localhost:8080/posts/recent';
@@ -140,13 +143,19 @@ function SiteHome() {
                                             <span className="nickname">{post.nickname}</span>
                                         </div>
                                         <div className="feed-stats">
-                                            <span className="likes" style={{
-                                                cursor: isLoggedIn ? 'pointer' : 'not-allowed',
-                                                color: post.likedByUser ? 'red' : 'black'
-                                            }}
-                                                  onClick={() => isLoggedIn && toggleLike(post.postId, post.likedByUser, post.likeCount)}>
-                                                {post.likedByUser ? ':하트2:' : ':흰색_하트:'} {post.likeCount}
-                                            </span>
+                                        <span className="likes" 
+      style={{
+          cursor: isLoggedIn ? 'pointer' : 'not-allowed',
+          color: post.likedByUser ? 'red' : 'black'
+      }}
+      onClick={(e) => {
+          e.stopPropagation(); // 이벤트 전파 방지
+          if (isLoggedIn) {
+              toggleLike(post.postId, post.likedByUser, post.likeCount);
+          }
+      }}>
+    {post.likedByUser ? <FaHeart /> : <FaRegHeart />} {post.likeCount}
+</span>
                                             <span className="comments">:말풍선: {post.commentCount}</span>
                                         </div>
                                     </div>
