@@ -26,7 +26,7 @@ public class PostRepository {
     }
 
     // postId로 게시글 조회
-    public Optional<Post> findById(Integer postId) {
+    public Optional<PostWithMediaDTO> findById(Integer postId) {
         return postMapper.findById(postId);
     }
 
@@ -54,6 +54,11 @@ public class PostRepository {
     public List<PostWithMediaDTO> findRecentPosts(String title, int page, int size, Integer userId) {
         int offset = (page - 1) * size;
         return postMapper.findRecentPosts(title, size, offset, userId);
+    }
+
+    // ✅ 특정 유저의 게시글 조회 (userId 기반)
+    public List<PostWithMediaDTO> findPostsByUserId(Integer userId) {
+        return postMapper.findPostsByUserId(userId);
     }
 
 }

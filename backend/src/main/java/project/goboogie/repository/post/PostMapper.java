@@ -13,7 +13,7 @@ import java.util.Optional;
 @Mapper
 public interface PostMapper {
     void save(Post post);
-    Optional<Post> findById(@Param("postId") Integer postId);
+    Optional<PostWithMediaDTO> findById(@Param("postId") Integer postId);
     List<Post> findAll();
     void update(Post post);
     void deleteById(@Param("postId") Integer postId);
@@ -29,6 +29,7 @@ public interface PostMapper {
                                            @Param("offset") int offset,
                                            @Param("userId") Integer userId);
 
-
+    // ✅ 특정 유저의 게시글 조회 (userId 기반)
+    List<PostWithMediaDTO> findPostsByUserId(@Param("userId") Integer userId);
 }
 

@@ -44,7 +44,7 @@ public class PostService {
         mediaRepository.save(media);
     }
 
-    public Optional<Post> getPostById(Integer postId) {
+    public Optional<PostWithMediaDTO> getPostById(Integer postId) {
         return postRepository.findById(postId);
     }
 
@@ -69,5 +69,10 @@ public class PostService {
     public List<PostWithMediaDTO> findRecentPosts(String title, int page, int size, Integer userId) {
         return postRepository.findRecentPosts(title, page, size, userId);
     }
+
+    public List<PostWithMediaDTO> getPostsByUserId(Integer userId) {
+        return postRepository.findPostsByUserId(userId);
+    }
+
 
 }
